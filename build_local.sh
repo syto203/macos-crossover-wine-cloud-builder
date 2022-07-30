@@ -89,6 +89,10 @@ pushd sources/wine
 patch -p1 < ${GITHUB_WORKSPACE}/distversion.patch
 popd
 
+echo "Patch api-ms-win-core-psm-appnotify-l1-1-0 dll"
+pushd sources/wine
+patch -p1 < ${GITHUB_WORKSPACE}/file.patch
+popd
 
 if [[ ${CROSS_OVER_VERSION} == 20.* ]]; then
     echo "Patch wcslen() in ntdll/wcstring.c to prevent crash if a nullptr is suppluied to the function (HACK)"

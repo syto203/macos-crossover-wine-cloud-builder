@@ -161,6 +161,13 @@ jobs:
           patch -p1 < ${{ github.workspace }}/distversion.patch
           popd
 
+      - name: Patch Add stub for api-ms-win-core-psm-appnotify-l1-1-0 dll
+        # Patch by Esdras Tarsis https://github.com/EsdrasTarsis
+        run: |
+          pushd sources/wine
+          patch -p1 < ${{ github.workspace }}/file.patch
+          popd
+
       - name: Patch ntdll/wcstring.c to prevent crash if a nullptr is supplied to the function
         # Hack by dasmy
         if: startsWith(matrix.CROSS_OVER_VERSION, '20')
